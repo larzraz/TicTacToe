@@ -8,16 +8,31 @@ namespace spil
 {
     class Program
     {
+        
+      
+        
+
+      
+        
         static void Main(string[] args)
         {
+            Console.Title = "LARZ RULEZ!";
+
+
+
+
+
             Program myProgram = new Program();
             myProgram.Run();
         }
 
         private void Run()
         {
-            TicTacToeMenu ticTacToeMenu = new TicTacToeMenu();
-            ticTacToeMenu.Show();
+            StartupMenu menu = new StartupMenu();
+            menu.Show();
         }
+
+       
+        
     }
 }

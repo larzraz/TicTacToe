@@ -11,7 +11,7 @@ namespace Test
         public void NeitherPlayerHasThreeInARow()
         {
             TicTacToe ticTacToe = new TicTacToe();
-            const string expected = " ";
+            string expected = "w";
             string actual = ticTacToe.Validate();
             Assert.AreEqual(expected, actual);
         }
@@ -23,15 +23,15 @@ namespace Test
         public void PlayerHasThreeInVerticalRow()
         {
             TicTacToe ticTacToe = new TicTacToe();
-            const string expected = "w";
+            string expected = "w";
             ticTacToe.GameBoard[2, 2] = ticTacToe.currentplayer;
 
             ticTacToe.GameBoard[2, 1] = ticTacToe.currentplayer;
 
             ticTacToe.GameBoard[2, 0] = ticTacToe.currentplayer;
             string actual = ticTacToe.Validate();
-            Assert.AreEqual(expected.ToString(),
-     actual.ToString());
+            Assert.AreEqual(expected,
+     actual);
         }
 
         [TestMethod]
@@ -39,15 +39,15 @@ namespace Test
         public void PlayerHasThreeInHorizontalRow()
         {
             TicTacToe ticTacToe = new TicTacToe();
-            const string expected = "w";
+            string expected = "w";
             ticTacToe.GameBoard[0, 0] = ticTacToe.currentplayer;
 
             ticTacToe.GameBoard[1, 0] = ticTacToe.currentplayer;
 
             ticTacToe.GameBoard[2, 0] = ticTacToe.currentplayer;
             string actual = ticTacToe.Validate();
-            Assert.AreEqual(expected.ToString(),
-     actual.ToString());
+            Assert.AreEqual(expected,
+     actual);
         }
 
 
@@ -56,15 +56,15 @@ namespace Test
         public void PlayerHasThreeInDiagonalRow()
         {
             TicTacToe ticTacToe = new TicTacToe();
-            const string expected = "w";
+            string expected = "w";
             ticTacToe.GameBoard[0, 0] = ticTacToe.currentplayer;
 
             ticTacToe.GameBoard[1, 1] = ticTacToe.currentplayer;
 
             ticTacToe.GameBoard[2, 2] = ticTacToe.currentplayer;
             string actual = ticTacToe.Validate();
-            Assert.AreEqual(expected.ToString(),
-     actual.ToString());
+            Assert.AreEqual(expected,
+     actual);
         }
 
 
@@ -74,7 +74,7 @@ namespace Test
         {
             TicTacToe ticTacToe = new TicTacToe();
             ticTacToe.counter = 9;
-            const string expected = "game over";
+            string expected = "game over";
             string actual = ticTacToe.Validate();
 
             Assert.AreEqual(expected, actual);
@@ -94,8 +94,8 @@ namespace Test
 
      //       ticTacToe.GameBoard[2, 0] = ticTacToe.currentplayer;
      //       string actual = ticTacToe.();
-     //       Assert.AreEqual(expected.ToString(),
-     //actual.ToString());
+     //       Assert.AreEqual(expected,
+     //actual;
 
      //   }
 

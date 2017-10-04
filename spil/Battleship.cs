@@ -6,53 +6,59 @@ using System.Threading.Tasks;
 
 namespace spil
 {
-
-    public class TicTacToe
+    class Battleship
     {
 
         public char[,] GameBoard { get; set; }
-        public TicTacToe()
+        public Battleship()
         {
-            GameBoard = new char[3, 3] { {' ', ' ', ' '},
-                {' ', ' ', ' '},
-                { ' ', ' ', ' '} };
+            GameBoard = new char[10, 10] { {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+            {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+             {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+              {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+               {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+                {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+                 {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+                  {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+                   {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+            {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '} };
         }
 
         public string GetGameBoardView()
         {
             string resultat = "";
-            resultat = resultat + "Y\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "3 *  " + GameBoard[0, 2] + "  *  " + GameBoard[1, 2] + "  *  " + GameBoard[2, 2] + "  *\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "2 *  " + GameBoard[0, 1] + "  *  " + GameBoard[1, 1] + "  *  " + GameBoard[2, 1] + "  *\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "1 *  " + GameBoard[0, 0] + "  *  " + GameBoard[1, 0] + "  *  " + GameBoard[2, 0] + "  *\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "     1     2     3    X\n";
+            int Row;
+            int Column;
+
+            Console.WriteLine("  ¦ 0 1 2 3 4 5 6 7 8 9");
+            Console.WriteLine("--+--------------------");
+            for (Row = 0; Row <= 9; Row++)
+            {
+                Console.Write((Row).ToString() + " ¦ ");
+                for (Column = 0; Column <= 9; Column++)
+                {
+                    resultat = resultat + GameBoard[Column, Row] + " ";
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("\n");
 
             return resultat;
         }
 
 
-        
+
         public int counter = 0;
         public string result = " ";
         public static Boolean hasWon = false;
 
 
-        
 
 
 
 
-            public string Validate()
+
+        public string Validate()
         {
 
             int u = 0;
@@ -91,58 +97,58 @@ namespace spil
 
                 }
 
-               
 
-                
+
+
             }
 
             return result;
         }
 
-        
-
-       
-          
-       
 
 
 
-    public int player = 0; 
+
+
+
+
+
+        public int player = 0;
 
         public char currentplayer = ' ';
-       
-        public char ChangePlayer() 
+
+        public char ChangePlayer()
         {
             if (player % 2 == 0)
             {
-                currentplayer = 'x'; 
+                currentplayer = 'x';
 
             }
 
             else
-            { currentplayer = 'o'; } 
+            { currentplayer = 'o'; }
 
-            return currentplayer; 
+            return currentplayer;
         }
 
 
         public void PlaceTile()
 
         {
-            
+
 
 
             int xValue;
 
             int yValue;
 
-            Console.Write("Vælg X: "); 
+            Console.Write("Vælg X: ");
 
-            xValue = Convert.ToInt32(Console.ReadLine()); 
+            xValue = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Vælg y: "); 
+            Console.Write("Vælg y: ");
 
-            yValue = Convert.ToInt32(Console.ReadLine()); 
+            yValue = Convert.ToInt32(Console.ReadLine());
 
             ChangePlayer();
 
@@ -174,7 +180,7 @@ namespace spil
 
         }
 
-  
+
         // her kan implementeres metoder til at sætte og flytte en brik
 
         public void MoveTile()
@@ -186,29 +192,29 @@ namespace spil
             int yValue;
             int newYValue;
             int newXValue;
-            Console.Write("Vælg X: "); 
-            xValue = Convert.ToInt32(Console.ReadLine()); 
+            Console.Write("Vælg X: ");
+            xValue = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Vælg y: "); 
+            Console.Write("Vælg y: ");
 
             yValue = Convert.ToInt32(Console.ReadLine());
-           
 
-            Console.Write("Vælg X: "); 
 
-            newXValue = Convert.ToInt32(Console.ReadLine()); 
+            Console.Write("Vælg X: ");
 
-            Console.Write("Vælg y: "); 
+            newXValue = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Vælg y: ");
 
             newYValue = Convert.ToInt32(Console.ReadLine());
 
 
-            
+
 
             GameBoard[newXValue - 1, newYValue - 1] = GameBoard[xValue - 1, yValue - 1];
             GameBoard[xValue - 1, yValue - 1] = ' ';
 
-           
+
             player++;
             ChangePlayer();
             counter++;
@@ -226,37 +232,37 @@ namespace spil
 
         }
 
-          char player1 = 'x';
-            int player1Counter = 0;
-            char player2 = 'o';
-            int player2Counter = 0;
-       
+        char player1 = 'x';
+        int player1Counter = 0;
+        char player2 = 'o';
+        int player2Counter = 0;
+
         public void Limiter()
         {
 
-          
 
 
-           if (player1Counter < 3 || player2Counter < 3)
+
+            if (player1Counter < 3 || player2Counter < 3)
             {
-                
+
                 PlaceTile();
-            } 
+            }
 
             else
                 Console.WriteLine("STOP HAMMERTIME");
-           
+
 
         }
         private void PlayAgain()
         {
-            
-                Console.WriteLine("GZ u vandt");
-                Console.WriteLine("wanna play again? ");
+
+            Console.WriteLine("GZ u vandt");
+            Console.WriteLine("wanna play again? ");
             Console.ReadKey();
             hasWon = false;
-            
-              
+
+
         }
 
     }
