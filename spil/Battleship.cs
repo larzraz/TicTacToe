@@ -104,9 +104,9 @@ namespace spil
             int boat = 2;
             int ship = 3;
 
-            Console.Write("Vælg båd: ");
+            Console.Write("Vælg båd: \n");
 
-            Console.Write("1: båd");
+            Console.Write("1: båd \n");
             Console.Write("2: skib ");
 
             
@@ -116,8 +116,8 @@ namespace spil
                 choice = GetUserChoise();
                 switch (choice)
                 {
-                    case "1": boatType = boat; break;
-                    case "2": boatType = ship; break;
+                    case "1": boatType = boat; running = false; break;
+                    case "2": boatType = ship; running = false;  break;
                     case "0": running = false; break;
                     default: ShowMenuSelectionErroe(); break;
                 }
@@ -131,10 +131,11 @@ namespace spil
         bool horizontal = false;
         public void HorizontalOrVertical()
         {
-            Console.Write("Hvilken vej vil du placere skibet?");
+            running = true;
+            Console.Write("Hvilken vej vil du placere skibet?\n");
 
-            Console.Write("1: Verticalt");
-            Console.Write("2: Horizontalt ");
+            Console.Write("1: Verticalt\n");
+            Console.Write("2: Horizontalt");
 
             
             do
@@ -143,8 +144,8 @@ namespace spil
                 choice = GetUserChoise();
                 switch (choice)
                 {
-                    case "1": vertical = true; break;
-                    case "2": horizontal = true; break;
+                    case "1": vertical = true; running = false; break;
+                    case "2": horizontal = true; running = false; break;
                     case "0": running = false; break;
                     default: ShowMenuSelectionErroe(); break;
                 }
@@ -172,16 +173,16 @@ namespace spil
             {
                 for (int i = 0; i <= boatType; i++)
                 {
-                    yCordinat = xCordinat + 1;
-                    placeShipGrid[xCordinat, yCordinat] = 'b'; ;
+                    yCordinat = yCordinat + 1;
+                    placeShipGrid[xCordinat, yCordinat] = 'b';
                 }
             }
             if (horizontal == true)
             {
                 for (int i = 0; i <= boatType; i++)
                 {
-                    yCordinat = xCordinat + 1;
-                    placeShipGrid[xCordinat, yCordinat] = 'b'; ;
+                    xCordinat = xCordinat + 1;
+                    placeShipGrid[xCordinat, yCordinat] = 'b'; 
                 }
             }
         }
