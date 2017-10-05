@@ -10,7 +10,7 @@ namespace spil
     { 
  
 
-            Boolean variation = true;
+           
             Battleship battleship{ get; set; }
 
             public void Show()
@@ -33,7 +33,7 @@ namespace spil
 
         private void PlaceShip()
         {
-           battleship.AskCordinates();
+            battleship.PlaceShips();
         }
 
         private void CreateNewGame()
