@@ -24,15 +24,22 @@ namespace spil
                     switch (choice)
                     {
                         case "1": CreateNewGame(); break;
+                        case "2": PlaceShip(); break;
                         case "0": running = false; break;
                         default: ShowMenuSelectionErroe(); break;
                     }
                 } while (running);
             }
 
+        private void PlaceShip()
+        {
+           battleship.AskCordinates();
+        }
+
         private void CreateNewGame()
         {
             battleship = new Battleship();
+            
         }
 
         private void ShowMenu()
@@ -40,7 +47,7 @@ namespace spil
                 Console.Clear();
                 if (battleship != null)
                 {
-                Console.WriteLine(battleship.GetGameBoardView());
+                Console.WriteLine(battleship.GetGridBoardView());
             }
             
                 Console.WriteLine("tic tac toe");
