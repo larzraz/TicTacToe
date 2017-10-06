@@ -35,23 +35,48 @@ namespace spil
         {
             string resultat = "";
             resultat = resultat + "Y\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "4 *  " + placeShipGrid[0, 3] + "  *  " + placeShipGrid[1, 3] + "  *  " + placeShipGrid[2, 3] + "  *\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "3 *  " + placeShipGrid[0, 2] + "  *  " + placeShipGrid[1, 2] + "  *  " + placeShipGrid[2, 2] + "  *\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "2 *  " + placeShipGrid[0, 1] + "  *  " + placeShipGrid[1, 1] + "  *  " + placeShipGrid[2, 1] + "  *\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "1 *  " + placeShipGrid[0, 0] + "  *  " + placeShipGrid[1, 0] + "  *  " + placeShipGrid[2, 0] + "  *\n";
-            resultat = resultat + "  *     *     *     *\n";
-            resultat = resultat + "  *******************\n";
-            resultat = resultat + "     1     2     3    X\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "10*  " + placeShipGrid[0, 9] + "  *  " + placeShipGrid[1, 2] + "  *  " + placeShipGrid[2, 2] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "9 *  " + placeShipGrid[0, 8] + "  *  " + placeShipGrid[1, 9] + "  *  " + placeShipGrid[2, 9] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "8 *  " + placeShipGrid[0, 7] + "  *  " + placeShipGrid[1, 8] + "  *  " + placeShipGrid[2, 8] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "7 *  " + placeShipGrid[0, 6] + "  *  " + placeShipGrid[1, 7] + "  *  " + placeShipGrid[2, 7] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "6 *  " + placeShipGrid[0, 5] + "  *  " + placeShipGrid[1, 6] + "  *  " + placeShipGrid[2, 6] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "5 *  " + placeShipGrid[0, 5] + "  *  " + placeShipGrid[1, 5] + "  *  " + placeShipGrid[2, 5] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "4 *  " + placeShipGrid[0, 4] + "  *  " + placeShipGrid[1, 4] + "  *  " + placeShipGrid[2, 4] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "3 *  " + placeShipGrid[0, 3] + "  *  " + placeShipGrid[1, 3] + "  *  " + placeShipGrid[2, 3] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "2 *  " + placeShipGrid[0, 2] + "  *  " + placeShipGrid[1, 2] + "  *  " + placeShipGrid[2, 2] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "1 *  " + placeShipGrid[0, 1] + "  *  " + placeShipGrid[1, 1] + "  *  " + placeShipGrid[2, 1] + "  *  " + placeShipGrid[3, 2] + "  *  " + placeShipGrid[4, 2] + "  *  " + placeShipGrid[5, 2] + "  *  " + placeShipGrid[6, 2] + "  *  " + placeShipGrid[7, 2] + "  *  " + placeShipGrid[8, 2] + "  *  " + placeShipGrid[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "     1     2     3     4     5     6     7     8    9     10   X\n";
 
             return resultat;
         }
@@ -92,7 +117,7 @@ namespace spil
         public void PlaceShips()
         {
             GetBoatType();
-            HorizontalOrVertical();
+           
             PlaceShip();
 
         }
@@ -166,18 +191,21 @@ namespace spil
 
             yCordinat = Convert.ToInt32(Console.ReadLine());
 
+            HorizontalOrVertical();
 
 
-            placeShipGrid[xCordinat, yCordinat] = 'b';
+
             if (vertical == true)
+                placeShipGrid[xCordinat, yCordinat] = 'b';
             {
-                for (int i = 0; i <= boatType; i++)
+                for (int i = 0; i < boatType; i++)
                 {
                     yCordinat = yCordinat + 1;
                     placeShipGrid[xCordinat, yCordinat] = 'b';
                 }
             }
             if (horizontal == true)
+                placeShipGrid[xCordinat, yCordinat] = 'b';
             {
                 for (int i = 0; i <= boatType; i++)
                 {
