@@ -9,13 +9,36 @@ namespace spil
     class Battleship
 
     {
+        GameBoards boards = new GameBoards();
         int boatType = 0;
+        int xCordinat = 0;
+        int yCordinat = 0;
+        public int shipCounter = 0;
+        int hitcounter = 1;
+        public bool placementOrGuessing = false;
+        
+
         bool running = true;
+        bool placementError = false;
+        
+        bool horizontalorvertical = false;
         string choice = "";
         public char[,] GameBoard { get; set; }
+        public char[,] placeShipGrid { get; set; }
         public Battleship()
         {
             GameBoard = new char[10, 10] { {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+            {' ', ' ', ' ',' ', ' ', ' ',' '    , ' ', ' ',' '},
+             {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+              {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+               {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+                {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+                 {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+                  {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+                   {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
+            {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '} };
+
+            placeShipGrid = new char[10, 10]{ {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
             {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
              {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
               {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
@@ -26,7 +49,7 @@ namespace spil
                    {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
             {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '} };
         }
-        char[,] placeShipGrid = new char[10, 10];
+        
        
 
       
@@ -82,31 +105,83 @@ namespace spil
             return resultat;
         }
 
-
-        public string GetGameBoardView()
+        public string GetShootingGameBoardView()
         {
             string resultat = "";
-            int Row;
-            int Column;
-           
+            resultat = resultat + "Y\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "9 *  " + GameBoard[0, 9] + "  *  " + GameBoard[1, 9] + "  *  " + GameBoard[2, 9] + "  *  " + GameBoard[3, 9] + "  *  " + GameBoard[4, 9] + "  *  " + GameBoard[5, 9] + "  *  " + GameBoard[6, 9] + "  *  " + GameBoard[7, 9] + "  *  " + GameBoard[8, 9] + "  *  " + GameBoard[9, 9] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "8 *  " + GameBoard[0, 8] + "  *  " + GameBoard[1, 8] + "  *  " + GameBoard[2, 8] + "  *  " + GameBoard[3, 8] + "  *  " + GameBoard[4, 8] + "  *  " + GameBoard[5, 8] + "  *  " + GameBoard[6, 8] + "  *  " + GameBoard[7, 8] + "  *  " + GameBoard[8, 8] + "  *  " + GameBoard[9, 8] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "7 *  " + GameBoard[0, 7] + "  *  " + GameBoard[1, 7] + "  *  " + GameBoard[2, 7] + "  *  " + GameBoard[3, 7] + "  *  " + GameBoard[4, 7] + "  *  " + GameBoard[5, 7] + "  *  " + GameBoard[6, 7] + "  *  " + GameBoard[7, 7] + "  *  " + GameBoard[8, 7] + "  *  " + GameBoard[9, 7] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "6 *  " + GameBoard[0, 6] + "  *  " + GameBoard[1, 6] + "  *  " + GameBoard[2, 6] + "  *  " + GameBoard[3, 6] + "  *  " + GameBoard[4, 6] + "  *  " + GameBoard[5, 6] + "  *  " + GameBoard[6, 6] + "  *  " + GameBoard[7, 6] + "  *  " + GameBoard[8, 6] + "  *  " + GameBoard[9, 6] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "5 *  " + GameBoard[0, 5] + "  *  " + GameBoard[1, 5] + "  *  " + GameBoard[2, 5] + "  *  " + GameBoard[3, 5] + "  *  " + GameBoard[4, 5] + "  *  " + GameBoard[5, 5] + "  *  " + GameBoard[6, 5] + "  *  " + GameBoard[7, 5] + "  *  " + GameBoard[8, 5] + "  *  " + GameBoard[9, 5] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "4 *  " + GameBoard[0, 4] + "  *  " + GameBoard[1, 4] + "  *  " + GameBoard[2, 4] + "  *  " + GameBoard[3, 4] + "  *  " + GameBoard[4, 4] + "  *  " + GameBoard[5, 4] + "  *  " + GameBoard[6, 4] + "  *  " + GameBoard[7, 4] + "  *  " + GameBoard[8, 4] + "  *  " + GameBoard[9, 4] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "3 *  " + GameBoard[0, 3] + "  *  " + GameBoard[1, 3] + "  *  " + GameBoard[2, 3] + "  *  " + GameBoard[3, 3] + "  *  " + GameBoard[4, 3] + "  *  " + GameBoard[5, 3] + "  *  " + GameBoard[6, 3] + "  *  " + GameBoard[7, 3] + "  *  " + GameBoard[8, 3] + "  *  " + GameBoard[9, 3] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "2 *  " + GameBoard[0, 2] + "  *  " + GameBoard[1, 2] + "  *  " + GameBoard[2, 2] + "  *  " + GameBoard[3, 2] + "  *  " + GameBoard[4, 2] + "  *  " + GameBoard[5, 2] + "  *  " + GameBoard[6, 2] + "  *  " + GameBoard[7, 2] + "  *  " + GameBoard[8, 2] + "  *  " + GameBoard[9, 2] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "1 *  " + GameBoard[0, 1] + "  *  " + GameBoard[1, 1] + "  *  " + GameBoard[2, 1] + "  *  " + GameBoard[3, 1] + "  *  " + GameBoard[4, 1] + "  *  " + GameBoard[5, 1] + "  *  " + GameBoard[6, 1] + "  *  " + GameBoard[7, 1] + "  *  " + GameBoard[8, 1] + "  *  " + GameBoard[9, 1] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "0 *  " + GameBoard[0, 0] + "  *  " + GameBoard[1, 0] + "  *  " + GameBoard[2, 0] + "  *  " + GameBoard[3, 0] + "  *  " + GameBoard[4, 0] + "  *  " + GameBoard[5, 0] + "  *  " + GameBoard[6, 0] + "  *  " + GameBoard[7, 0] + "  *  " + GameBoard[8, 0] + "  *  " + GameBoard[9, 0] + "  *\n";
+            resultat = resultat + "  *     *     *     *     *     *     *     *     *     *     *\n";
+            resultat = resultat + "  *************************************************************\n";
+            resultat = resultat + "     0     1     2     3     4     5     6     7    8     9   X\n";
 
-            Console.WriteLine("  ¦ 0 1 2 3 4 5 6 7 8 9");
-            Console.WriteLine("--+--------------------");
-            for (Row = 0; Row <= 9; Row++)
-            {
-                Console.Write((Row).ToString() + " ¦");
-                for (Column = 0; Column <= 9; Column++)
-                {
-                    resultat = resultat + GameBoard[Column, Row] + " ";
-                  
-                }
-
-                Console.WriteLine();
-            }
-            Console.WriteLine("\n");
 
             return resultat;
+
         }
+
+
+        //public string GetGameBoardView()
+        //{
+        //    string resultat = "";
+        //    int Row;
+        //    int Column;
+           
+
+        //    Console.WriteLine("  ¦ 0 1 2 3 4 5 6 7 8 9");
+        //    Console.WriteLine("--+--------------------");
+        //    for (Row = 0; Row <= 9; Row++)
+        //    {
+        //        Console.Write((Row).ToString() + " ¦");
+        //        for (Column = 0; Column <= 9; Column++)
+        //        {
+        //            resultat = resultat + GameBoard[Column, Row] + " ";
+                  
+        //        }
+
+        //        Console.WriteLine();
+        //    }
+        //    Console.WriteLine("\n");
+
+        //    return resultat;
+        //}
 
 
 
@@ -118,15 +193,74 @@ namespace spil
         public void PlaceShips()
         {
             GetBoatType();
-            PlaceShip();
+            choseShip();
 
-            horizontal = false;
-            vertical = false;
+            
+            horizontalorvertical = false;
 
 
         }
 
-       
+        public void CheckForError()
+        {
+            if (placeShipGrid[xCordinat, yCordinat] == 'S')
+            {
+                Console.WriteLine("Du kan ikke placere her");
+                placementError = true;
+            }
+            
+
+
+        }
+        int hitShipcounter = 0;
+        public void GuessShip()
+        {
+            Console.Write(currentplayer);
+            Console.Write(hitcounter + "    " + hitShipcounter);
+
+            Console.Write("Vælg X: ");
+
+            xCordinat = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Vælg y: ");
+
+            yCordinat = Convert.ToInt32(Console.ReadLine());
+
+            if (placeShipGrid[xCordinat, yCordinat] == 'S')
+            {
+                GameBoard[xCordinat, yCordinat] = 'H';
+                hitShipcounter++;
+            }
+            else
+            {
+                GameBoard[xCordinat, yCordinat] = 'M';
+            }
+
+
+            ValidateWinner();
+            ChangePlayer();
+            player++;
+
+
+
+
+        }
+
+        public void ValidateWinner()
+        {
+            if (hitShipcounter == hitcounter)
+            {
+                Console.Clear();
+                Console.WriteLine("Tilykke du har vundet!");
+                Console.ReadKey();
+            }
+
+        }
+
+
+
+
+
 
         public void GetBoatType()
         {
@@ -156,8 +290,56 @@ namespace spil
 
         }
 
-        bool vertical = false;
-        bool horizontal = false;
+        public int player = 0;
+
+        public string currentplayer = "abe";
+       public bool playerNo = false;
+
+        public void ChangePlayer()
+        {
+            if (placementOrGuessing == false)
+            {
+                if (player % 2 == 0)
+                {
+                    currentplayer = "Player 1";
+                    playerNo = false;
+                    GameBoard = boards.GameBoardGuessPlayer1;
+                    placeShipGrid = boards.GameBoardPlayer1;
+
+                }
+
+                else
+                {
+                    currentplayer = "Player 2";
+                    playerNo = true;
+                    GameBoard = boards.GameBoardGuessPlayer1;
+                    placeShipGrid = boards.GameBoardPlayer1;
+                }
+            }
+            if (placementOrGuessing == true)
+            {
+                if (player % 2 == 0)
+                {
+                    currentplayer = "Player 1";
+                    playerNo = false;
+                    GameBoard = boards.GameBoardGuessPlayer1;
+                    placeShipGrid = boards.GameBoardPlayer2;
+
+                }
+
+                else
+                {
+                    currentplayer = "Player 2";
+                    playerNo = true;
+                    GameBoard = boards.GameBoardGuessPlayer1;
+                    placeShipGrid = boards.GameBoardPlayer2;
+                }
+            }
+           
+        }
+
+
+
         public void HorizontalOrVertical()
         {
             running = true;
@@ -173,20 +355,18 @@ namespace spil
                 choice = GetUserChoise();
                 switch (choice)
                 {
-                    case "1": vertical = true; running = false; break;
-                    case "2": horizontal = true; running = false; break;
+                    case "1":horizontalorvertical = false;  running = false; break;
+                    case "2":horizontalorvertical = true;  running = false; break;
                     case "0": running = false; break;
                     default: ShowMenuSelectionErroe(); break;
                 }
             } while (running);
         }
 
-        public void PlaceShip()
+        public void choseShip()
         {
-            int xCordinat;
 
-            int yCordinat;
-
+            Console.Write(currentplayer);
             Console.Write("Vælg X: ");
 
             xCordinat = Convert.ToInt32(Console.ReadLine());
@@ -194,36 +374,54 @@ namespace spil
             Console.Write("Vælg y: ");
 
             yCordinat = Convert.ToInt32(Console.ReadLine());
-
+                        
             HorizontalOrVertical();
-
-
-
-            if (vertical == true)
-                placeShipGrid[xCordinat, yCordinat] = 'a';
+            CheckForError();
+            if (placementError == false)
             {
-                for (int i = 0; i < boatType; i++)
-                {
-                    yCordinat = yCordinat + 1;
-                    placeShipGrid[xCordinat, yCordinat] = 'k';
-                }
-                horizontal = false;
-                vertical = false;
+                PlaceShip();
             }
-            if (horizontal == true)
-                placeShipGrid[xCordinat, yCordinat] = 'a';
-            {
-                for (int i = 0; i <= boatType; i++)
-                {
-                    xCordinat = xCordinat + 1;
-                    placeShipGrid[xCordinat, yCordinat] = 'c'; 
-                }
-                horizontal = false;
-                vertical = false;
 
-            }
+
+
         }
 
+        public void PlaceShip()
+        {
+            Console.Write(currentplayer);
+            if (horizontalorvertical == false)
+            {
+                placeShipGrid[xCordinat, yCordinat] = 'S';
+                for (int i = 1; i < boatType; i++)
+                {
+                    yCordinat = yCordinat + 1;
+                    CheckForError();
+                    if (placementError == false) 
+                    {
+                        placeShipGrid[xCordinat, yCordinat] = 'S';
+                        hitcounter = hitcounter + 1;
+                    }
+
+                }
+
+            }
+            if (horizontalorvertical == true)
+            {
+                placeShipGrid[xCordinat, yCordinat] = 'S';
+                for (int i = 1; i < boatType; i++)
+                {
+                    xCordinat = xCordinat + 1;
+                    CheckForError();
+                    if (placementError == false) 
+                    {
+                        placeShipGrid[xCordinat, yCordinat] = 'S';
+                        hitcounter = hitcounter + 1;
+                    } 
+                }
+            }
+            shipCounter++;
+            Console.WriteLine(hitcounter);
+        }
 
         private string GetUserChoise()
         {

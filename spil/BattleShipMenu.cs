@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace spil
 {
     class BattleShipMenu
-    { 
- 
+    {
+        private bool placeOrGuess = false;
 
-           
-            Battleship battleship{ get; set; }
+        Battleship battleship{ get; set; }
 
             public void Show()
             {
@@ -25,15 +24,29 @@ namespace spil
                     {
                         case "1": CreateNewGame(); break;
                         case "2": PlaceShip(); break;
+                        case "3": GuessShip();placeOrGuess = true;break; 
                         case "0": running = false; break;
                         default: ShowMenuSelectionErroe(); break;
                     }
                 } while (running);
             }
 
+        private void GuessShip()
+        {
+            battleship.GuessShip();
+            battleship.placementOrGuessing = true;
+        }
+
         private void PlaceShip()
         {
-            battleship.PlaceShips();
+            if (battleship.shipCounter <= 4)
+            {
+                battleship.PlaceShips();
+                battleship.placementOrGuessing = false;
+            }
+            else
+                Console.WriteLine("Du har placeret alle dine skibe");
+            Console.ReadKey();
         }
 
         private void CreateNewGame()
@@ -47,15 +60,21 @@ namespace spil
                 Console.Clear();
                 if (battleship != null)
                 {
-                Console.WriteLine(battleship.GetGridBoardView());
+                if (placeOrGuess == false)
+                {
+                    Console.WriteLine(battleship.GetGridBoardView());
+                }
+                else
+                    Console.WriteLine(battleship.GetShootingGameBoardView());
+
             }
             
-                Console.WriteLine("tic tac toe");
+                Console.WriteLine("Battleships");
                 Console.WriteLine();
                 Console.WriteLine("1. Opret nyt spil");
-                Console.WriteLine("2. Set en brik");
-                Console.WriteLine("3. Flyt en brik");
-                Console.WriteLine("4. Spil Variation");
+                Console.WriteLine("2. Placër et skib");
+                Console.WriteLine("3. Skyd Skibe");
+              // Console.Write(battleship.playerNo);
                 Console.WriteLine();
                 Console.WriteLine("0. exit");
             }
