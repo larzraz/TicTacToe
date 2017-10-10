@@ -67,6 +67,7 @@ namespace spil
             
                 if (battleship != null)
                 {
+                battleship.ChangePlayer();
                 if (placeOrGuess == false)
                 {
                     Console.WriteLine(battleship.GetGridBoardView());
