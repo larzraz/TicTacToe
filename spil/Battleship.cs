@@ -9,12 +9,17 @@ namespace spil
     class Battleship
 
     {
+        BattleShipMenu battleShipMenu = new BattleShipMenu();
         GameBoards boards = new GameBoards();
         int boatType = 0;
         int xCordinat = 0;
         int yCordinat = 0;
         public int shipCounter = 0;
+        int shipCounterP1 = 0;
+        int shipCounterP2 = 0;
         int hitcounter = 1;
+        int hitcounterP1 = 1;
+        int hitcounterP2 = 1;
         public bool placementOrGuessing = false;
         
 
@@ -25,6 +30,7 @@ namespace spil
         string choice = "";
         public char[,] GameBoard { get; set; }
         public char[,] placeShipGrid { get; set; }
+        
         public Battleship()
         {
             GameBoard = new char[10, 10] { {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
@@ -48,6 +54,8 @@ namespace spil
                   {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
                    {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
             {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '} };
+
+            placeShipGrid = boards.GameBoardPlayer1;
         }
         
        
@@ -157,6 +165,7 @@ namespace spil
 
         }
 
+        
 
         //public string GetGameBoardView()
         //{
@@ -215,8 +224,9 @@ namespace spil
         int hitShipcounter = 0;
         public void GuessShip()
         {
+            
             Console.Write(currentplayer);
-            Console.Write(hitcounter + "    " + hitShipcounter);
+            //Console.Write(hitcounter + "    " + hitShipcounter);
 
             Console.Write("Vælg X: ");
 
@@ -236,13 +246,12 @@ namespace spil
                 GameBoard[xCordinat, yCordinat] = 'M';
             }
 
-
+            
             ValidateWinner();
+            
             ChangePlayer();
             player++;
-
-
-
+           
 
         }
 
@@ -303,6 +312,8 @@ namespace spil
                 {
                     currentplayer = "Player 1";
                     playerNo = false;
+                    hitcounter = hitcounterP1;
+                    shipCounter = shipCounterP1;
                     GameBoard = boards.GameBoardGuessPlayer1;
                     placeShipGrid = boards.GameBoardPlayer1;
 
@@ -312,8 +323,10 @@ namespace spil
                 {
                     currentplayer = "Player 2";
                     playerNo = true;
-                    GameBoard = boards.GameBoardGuessPlayer1;
-                    placeShipGrid = boards.GameBoardPlayer1;
+                    hitcounter = hitcounterP2;
+                    shipCounter = shipCounterP2;
+                    GameBoard = boards.GameBoardGuessPlayer2;
+                    placeShipGrid = boards.GameBoardPlayer2;
                 }
             }
             if (placementOrGuessing == true)
@@ -322,6 +335,8 @@ namespace spil
                 {
                     currentplayer = "Player 1";
                     playerNo = false;
+                    hitcounter = hitcounterP1;
+                    shipCounter = shipCounterP1;
                     GameBoard = boards.GameBoardGuessPlayer1;
                     placeShipGrid = boards.GameBoardPlayer2;
 
@@ -331,11 +346,14 @@ namespace spil
                 {
                     currentplayer = "Player 2";
                     playerNo = true;
-                    GameBoard = boards.GameBoardGuessPlayer1;
-                    placeShipGrid = boards.GameBoardPlayer2;
+                    hitcounter = hitcounterP2;
+                    shipCounter = shipCounterP2;
+                    GameBoard = boards.GameBoardGuessPlayer2;
+                    placeShipGrid = boards.GameBoardPlayer1                                                                                                                     ;
                 }
             }
-           
+            GetShootingGameBoardView();
+
         }
 
 
@@ -399,7 +417,14 @@ namespace spil
                     if (placementError == false) 
                     {
                         placeShipGrid[xCordinat, yCordinat] = 'S';
-                        hitcounter = hitcounter + 1;
+                        if (playerNo == false)
+                        {
+                            hitcounterP1 = hitcounterP1 + 1;
+                        }
+                        if (playerNo == true)
+                        {
+                            hitcounterP2 = hitcounterP2 + 1;
+                        }
                     }
 
                 }
@@ -415,11 +440,29 @@ namespace spil
                     if (placementError == false) 
                     {
                         placeShipGrid[xCordinat, yCordinat] = 'S';
-                        hitcounter = hitcounter + 1;
+                        if (playerNo == false)
+                        {
+                            hitcounterP1 = hitcounterP1 + 1;
+                        }
+                        if (playerNo == true)
+                        {
+                            hitcounterP2 = hitcounterP2 + 1;
+                        }
                     } 
                 }
             }
-            shipCounter++;
+            if(playerNo == false)
+            {
+                shipCounterP1++;
+            }
+            if (playerNo == true)
+            {
+                shipCounterP2++;
+            }
+           
+            ChangePlayer();
+            player++;
+
             Console.WriteLine(hitcounter);
         }
 

@@ -11,6 +11,8 @@ namespace spil
         private bool placeOrGuess = false;
 
         Battleship battleship{ get; set; }
+        
+   
 
             public void Show()
             {
@@ -18,7 +20,8 @@ namespace spil
                 string choice = "";
                 do
                 {
-                    ShowMenu();
+                
+                ShowMenu();
                     choice = GetUserChoise();
                     switch (choice)
                     {
@@ -45,27 +48,37 @@ namespace spil
                 battleship.placementOrGuessing = false;
             }
             else
+                
                 Console.WriteLine("Du har placeret alle dine skibe");
             Console.ReadKey();
         }
 
         private void CreateNewGame()
         {
+           
             battleship = new Battleship();
-            
+           
+
         }
 
         private void ShowMenu()
             {
                 Console.Clear();
+            
                 if (battleship != null)
                 {
                 if (placeOrGuess == false)
                 {
                     Console.WriteLine(battleship.GetGridBoardView());
+                   
+                    Console.WriteLine(battleship.currentplayer);
                 }
-                else
+                if (placeOrGuess == true)
+                {
                     Console.WriteLine(battleship.GetShootingGameBoardView());
+                  
+                    Console.WriteLine(battleship.currentplayer);
+                }
 
             }
             
