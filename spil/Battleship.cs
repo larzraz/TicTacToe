@@ -17,6 +17,7 @@ namespace spil
         public int shipCounter = 0;
         int shipCounterP1 = 0;
         int shipCounterP2 = 0;
+        int hitShipcounter = 0;
         int hitcounter = 1;
         int hitcounterP1 = 1;
         int hitcounterP2 = 1;
@@ -24,12 +25,13 @@ namespace spil
         bool error = false;
         bool running = true;
         bool placementError = false;
-        
+        public int player = 0;
+        public string currentplayer = "abe";
+        public bool playerNo = false;
         bool horizontalorvertical = false;
         string choice = "";
         public char[,] GameBoard { get; set; }
-        public char[,] placeShipGrid { get; set; }
-        
+        public char[,] placeShipGrid { get; set; }   
         public Battleship()
         {
             GameBoard = new char[10, 10] { {' ', ' ', ' ',' ', ' ', ' ',' ', ' ', ' ',' '},
@@ -56,8 +58,6 @@ namespace spil
 
             placeShipGrid = boards.GameBoardPlayer1;
         }
-        
-
         public string GetGridBoardView()
         {
             string resultat = "";
@@ -108,7 +108,6 @@ namespace spil
 
             return resultat;
         }
-
         public string GetShootingGameBoardView()
         {
             string resultat = "";
@@ -160,7 +159,6 @@ namespace spil
             return resultat;
 
         }
-       
         //public string GetGameBoardView()
         //{
         //    string resultat = "";
@@ -192,7 +190,6 @@ namespace spil
 
 
         // her kan implementeres metoder til at sætte og flytte en brik
-
         public void PlaceShips()
         {
             GetBoatType();
@@ -205,98 +202,18 @@ namespace spil
         }
         int xCordinatcheck = 0;
         int yCordinatcheck = 0;
-
+        bool outOfRange = false;
         private void CheckforOutOfRangeError()
         {
             if (xCordinat > 9 || yCordinat > 9)
             {
-                Console.WriteLine("Du kan ikke placerse her");
-                placementError = true;
-
-            }
-        }
-        private void CheckForOverlap()
-        {
-            if (placementError == false)
-            {
-                if (placeShipGrid[xCordinat, yCordinat] == 'S')
-                {
-                    Console.WriteLine("Du kan ikke placere her");
-                    placementError = true;
-                }
-                if (horizontalorvertical == true)
-                {
-                    if (xCordinatcheck + boatType > 9)
-                    {
-                        Console.WriteLine("Du kan ikke placerse her");
-                        placementError = true;
-                    }
-                    else
-                    {
-                        for (int i = 1; i < boatType; i++)
-                        {
-                            xCordinatcheck = xCordinatcheck + 1;
-                            ShowCordinatesError();
-                            if (placeShipGrid[xCordinatcheck, yCordinatcheck] == 'S')
-                            {
-                                Console.WriteLine("Du kan ikke placered her");
-                                error = true;
-                            }
-                            else
-                                break;
-                        }
-                    }
-
-
-                }
-                if (horizontalorvertical == false)
-                {
-                    if (yCordinatcheck + boatType > 9)
-                    {
-                        Console.WriteLine("Du kan ikke placerse her");
-                        placementError = true;
-                    }
-                    else
-                    {
-
-                        for (int i = 1; i < boatType; i++)
-                        {
-                            yCordinatcheck = yCordinatcheck + 1;
-                            ShowCordinatesError();
-                            if (placeShipGrid[xCordinatcheck, yCordinatcheck] == 'S')
-                            {
-                                Console.WriteLine("Du kan ikke placere her");
-                                error = true;
-                            }
-                            else
-                                break;
-                        }
-                    }
-                }
-                if (error == true)
-                {
-                    placementError = true;
-                }
-            }
-        }
-        public void CheckForError()
-        {            
-            int xCordinatcheck = xCordinat;
-            int yCordinatcheck = yCordinat;
-            int xOrY = 0;
-            int xPlace = 0;
-            int yPlace = 0;
-            
-            bool outOfRange = false;
-            TryAgain();
-            CheckforOutOfRangeError();
-            if (xCordinatcheck  > 10 || yCordinatcheck> 10)
-            {
-                Console.WriteLine("Du kan ikke placerse her");
+                Console.WriteLine("Du kan ikke placeres her");
                 outOfRange = true;
-
+                placementError = true;
             }
-           
+        }
+        private void CheckForFirstPlacement()
+        {
             if (outOfRange == false)
             {
                 if (placeShipGrid[xCordinat, yCordinat] == 'S')
@@ -304,25 +221,32 @@ namespace spil
                     Console.WriteLine("Du kan ikke placere hear");
                     placementError = true;
                 }
-                //if (horizontalorvertical == true)
-                    if (horizontalorvertical == true)
-                    {
-                        xOrY = xCordinatcheck;
-                    }
+            }
+        }
+
+        private void CheckForOverlap()
+        {
+            int xOrY = 0;
+            int xPlace = 0;
+            int yPlace = 0;
+            if (outOfRange == false)
+            {             
+                if (horizontalorvertical == true)
+                {
+                    xOrY = xCordinat;
+                }
                 else
-                    {
-                        xOrY = yCordinatcheck;
-                    }
-
-
-                        if (xCordinatcheck + boatType > 9)
-                        {
-                            Console.WriteLine("Du kan ikke placerse her");
-                            placementError = true;
-                        }
-                        else
-                        {
-                            int i = 0;
+                {
+                    xOrY = yCordinat;
+                }
+                if (xOrY + boatType > 9)
+                {
+                    Console.WriteLine("Du kan ikke placeres her");
+                    placementError = true;
+                }
+                else
+                {
+                    int i = 0;
                     do
                     {
                         xOrY = xOrY + 1;
@@ -337,78 +261,34 @@ namespace spil
                             xPlace = xCordinatcheck;
                             yPlace = xOrY;
                         }
-
-
                         if (placeShipGrid[xPlace, yPlace] == 'S')
                         {
-                            Console.WriteLine("Du kan ikke placereds her" + xPlace + "Ff" + yPlace);
+                            Console.WriteLine("Du kan ikke placeres her");
                             error = true;
                         }
                         i++;
-
-
-
                     } while (i < boatType && error == false);
-
-                    //    do
-                    //    {
-                    //        xCordinatcheck = xCordinatcheck + 1;
-                    //        ShowCordinatesError();
-                    //        if (placeShipGrid[xCordinatcheck, yCordinatcheck] == 'S')
-                    //        {
-                    //            Console.WriteLine("Du kan ikke placered her");
-                    //            error = true;
-                    //        }
-                    //        i++;
-
-                    //    } while (i < boatType && error == false);
-                    //}
-
-
                 }
-                //if (horizontalorvertical == false)
-                //{
-                //    if (yCordinatcheck + boatType > 9)
-                //    {
-                //        Console.WriteLine("Du kan ikke placerse her");
-                //        placementError = true;
-                //    }
-                //    else
-                //    {
-                //        int i = 0;
-                //        do
-                //        {
-
-                //            yCordinatcheck = yCordinatcheck + 1;
-                //            ShowCordinatesError();
-                //            if (placeShipGrid[xCordinatcheck, yCordinatcheck] == 'S')
-                //            {
-                //                Console.WriteLine("Du kan ikke placerea her");
-                //                error = true;
-                //            }
-                //            i++;
-                //        } while (i < boatType || error == false);
-
             }
-
+        }
+        public void CheckForError()
+        {                                   
+            TryAgain();
+            CheckforOutOfRangeError();
+            CheckForOverlap();
+           
             if (error == true)
             {
                 placementError = true;
             }
-        }
-
-
-
-
-    
-        int hitShipcounter = 0;
+        }   
+       
         public void GuessShip()
         {
             Console.Write(currentplayer);
             Console.Write("Vælg X: ");
             xCordinat = Convert.ToInt32(Console.ReadLine());
             Console.Write("Vælg y: ");
-
             yCordinat = Convert.ToInt32(Console.ReadLine());
             CheckForError();
             ShowCordinatesError();
@@ -421,11 +301,9 @@ namespace spil
             {
                 GameBoard[xCordinat, yCordinat] = 'M';
             }
-
             ValidateWinner();
             ChangePlayer();
             player++;
-
         }
 
         public void ValidateWinner()
@@ -438,26 +316,15 @@ namespace spil
             }
 
         }
-
-
-
-
-
-
         public void GetBoatType()
         {
             int boat = 2;
             int ship = 3;
-
             Console.Write("Vælg båd: \n");
-
             Console.Write("1: båd \n");
-            Console.Write("2: skib ");
-
-            
+            Console.Write("2: skib ");          
             do
-            {
-                
+            {              
                 choice = GetUserChoise();
                 switch (choice)
                 {
@@ -466,16 +333,8 @@ namespace spil
                     default: ShowMenuSelectionErroe(); break;
                 }
             } while (running);
-
-            
-
         }
-
-        public int player = 0;
-
-        public string currentplayer = "abe";
-       public bool playerNo = false;
-
+    
         public void ChangePlayer()
         {
             if (placementOrGuessing == false)
@@ -488,9 +347,7 @@ namespace spil
                     shipCounter = shipCounterP1;
                     GameBoard = boards.GameBoardGuessPlayer1;
                     placeShipGrid = boards.GameBoardPlayer1;
-
                 }
-
                 else
                 {
                     currentplayer = "Player 2";
@@ -527,21 +384,14 @@ namespace spil
             GetShootingGameBoardView();
 
         }
-
-
-
         public void HorizontalOrVertical()
         {
             running = true;
             Console.Write("Hvilken vej vil du placere skibet?\n");
-
             Console.Write("1: Verticalt\n");
-            Console.Write("2: Horizontalt");
-
-            
+            Console.Write("2: Horizontalt");            
             do
             {
-
                 choice = GetUserChoise();
                 switch (choice)
                 {
@@ -551,40 +401,53 @@ namespace spil
                 }
             } while (running);
         }
-
         public void ChoseShip()
         {
-
             Console.Write(currentplayer);
             Console.Write("Vælg X: ");
-
             xCordinat = Convert.ToInt32(Console.ReadLine());
-
             Console.Write("Vælg y: ");
-
             yCordinat = Convert.ToInt32(Console.ReadLine());
             CheckforOutOfRangeError();
             HorizontalOrVertical();
+            CheckForFirstPlacement();
             CheckForError();
             if (placementError == false)
             {
                 PlaceShip();
             }
         }
-
         public void PlaceShip()
         {
+            int xOrY = 0;
+            int xPlace = xCordinat;
+            int yPlace = yCordinat;
             Console.Write(currentplayer);
             if (horizontalorvertical == false)
             {
-                placeShipGrid[xCordinat, yCordinat] = 'S';
+                xOrY = yCordinat;                
+            } else
+            {
+                xOrY = xCordinat;
+            }
+                placeShipGrid[xPlace, yPlace] = 'S';
                 for (int i = 1; i < boatType; i++)
                 {
-                    yCordinat = yCordinat + 1;
+                    xOrY = xOrY + 1;
                     CheckForError();
+                    if (horizontalorvertical == false)
+                    {
+                        xPlace = xCordinat;
+                        yPlace = xOrY;
+                    } else
+                    {
+                        
+                            xPlace = xOrY;
+                            yPlace = yCordinat;
+                         }                 
                     if (placementError == false)
                     {
-                        placeShipGrid[xCordinat, yCordinat] = 'S';
+                        placeShipGrid[xPlace, yPlace] = 'S';
                         if (playerNo == false)
                         {
                             hitcounterP1 = hitcounterP1 + 1;
@@ -594,39 +457,8 @@ namespace spil
                             hitcounterP2 = hitcounterP2 + 1;
                         }
                         ChangePlayer();
-
                     }
-                   
-                        
-
-                }
-                
-            }
-            if (horizontalorvertical == true)
-            {
-                placeShipGrid[xCordinat, yCordinat] = 'S';
-                for (int i = 1; i < boatType; i++)
-                {
-                    xCordinat = xCordinat + 1;
-                    CheckForError();
-                    if (placementError == false) 
-                    {
-                        placeShipGrid[xCordinat, yCordinat] = 'S';
-                        if (playerNo == false)
-                        {
-                            hitcounterP1 = hitcounterP1 + 1;
-                        }
-                        if (playerNo == true)
-                        {
-                            hitcounterP2 = hitcounterP2 + 1;
-                        }
-                        ChangePlayer();
-
-                    } 
-                    
-                }
-
-            }
+                }                
             if(playerNo == false)
             {
                 shipCounterP1++;
@@ -637,26 +469,22 @@ namespace spil
             }
             player++;           
         }
-
         private string GetUserChoise()
         {
             Console.WriteLine();
             Console.Write("Indtast dit valg: ");
             return Console.ReadLine();
         }
-
         private void ShowMenuSelectionErroe()
         {
             Console.WriteLine("Ugyldigt valg.");
             Console.ReadLine();
         }
-
         private void TryAgain()
         {
             placementError = false;
             error = false;
         }
-
         private void ShowCordinatesError()
         {
             if (xCordinat > 9 || yCordinat > 9)
@@ -664,14 +492,11 @@ namespace spil
                 Console.WriteLine("Ugyldigt valg.");
                 Console.ReadLine();
             }
-
             if (xCordinatcheck > 9 || yCordinatcheck > 9)
             {
                 Console.WriteLine("Ugyldigt valg.");
                 Console.ReadLine();
             }
         }
-
-
     }
 }
