@@ -28,7 +28,7 @@ namespace spil
             
         }
 
-        public void CreateBattleShips()
+        public  void CreateBattleShips()
         {
             BattleShipMenu battleShipMenu = new BattleShipMenu();
             battleShipMenu.Show();
