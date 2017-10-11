@@ -11,7 +11,7 @@ namespace spil
     {
         BattleShipMenu battleShipMenu = new BattleShipMenu();
         GameBoards boards = new GameBoards();
-        int boatType = 0;
+        int boatType = 0; 
         int xCordinat = 0;
         int yCordinat = 0;
         public int shipCounter = 0;
@@ -28,7 +28,8 @@ namespace spil
         public int player = 0;
         public string currentplayer = "abe";
         public bool playerNo = false;
-        bool horizontalorvertical = false;
+        bool shipPlacementHorizontal = false;
+        bool outOfRange = false;
         string choice = "";
         public char[,] GameBoard { get; set; }
         public char[,] placeShipGrid { get; set; }   
@@ -190,20 +191,18 @@ namespace spil
 
 
         // her kan implementeres metoder til at sætte og flytte en brik
-        public void PlaceShips()
+        public void PlaceShips() //Metoden kaldes når der skal placeres nye skibe, den kalder metoden til bådtype og hvor skibet skal placeres
         {
             GetBoatType();
-            ChoseShip();
+            ChosePlacementOfShip();
 
             
-            horizontalorvertical = false;
+            shipPlacementHorizontal = false;
 
 
-        }
-        int xCordinatcheck = 0;
-        int yCordinatcheck = 0;
-        bool outOfRange = false;
-        private void CheckforOutOfRangeError()
+        } 
+      
+        private void CheckforOutOfRangeError() //tjekker om kordinaterne ligger udenfor kordinatsystemet
         {
             if (xCordinat > 9 || yCordinat > 9)
             {
@@ -212,7 +211,7 @@ namespace spil
                 placementError = true;
             }
         }
-        private void CheckForFirstPlacement()
+        private void CheckForFirstPlacement() // tjekker om der allerede er placeret et skib, på det første kordinat, hvor man vil sætte et nyt
         {
             if (outOfRange == false)
             {
@@ -224,14 +223,14 @@ namespace spil
             }
         }
 
-        private void CheckForOverlap()
+        private void CheckForOverlap() //tjekker om der et overlap med et andet skib når man placere et nyt skib
         {
             int xOrY = 0;
             int xPlace = 0;
             int yPlace = 0;
             if (outOfRange == false)
             {             
-                if (horizontalorvertical == true)
+                if (shipPlacementHorizontal == true)
                 {
                     xOrY = xCordinat;
                 }
@@ -251,14 +250,14 @@ namespace spil
                     {
                         xOrY = xOrY + 1;
                         ShowCordinatesError();
-                        if (horizontalorvertical == true)
+                        if (shipPlacementHorizontal == true)
                         {
                             xPlace = xOrY;
-                            yPlace = yCordinatcheck;
+                            yPlace = yCordinat;
                         }
                         else
                         {
-                            xPlace = xCordinatcheck;
+                            xPlace = xCordinat;
                             yPlace = xOrY;
                         }
                         if (placeShipGrid[xPlace, yPlace] == 'S')
@@ -271,7 +270,7 @@ namespace spil
                 }
             }
         }
-        public void CheckForError()
+        public void CheckForError() // kalder de forskellige errorcheck metoder
         {                                   
             TryAgain();
             CheckforOutOfRangeError();
@@ -283,7 +282,7 @@ namespace spil
             }
         }   
        
-        public void GuessShip()
+        public void GuessShip() //bruges når man skal gætte modstanderens placeringer af skibe.
         {
             Console.Write(currentplayer);
             Console.Write("Vælg X: ");
@@ -301,12 +300,12 @@ namespace spil
             {
                 GameBoard[xCordinat, yCordinat] = 'M';
             }
-            ValidateWinner();
+            FindTheWinner();
             ChangePlayer();
             player++;
         }
 
-        public void ValidateWinner()
+        public void FindTheWinner() //finder og erklærer vinderen
         {
             if (hitShipcounter == hitcounter)
             {
@@ -316,7 +315,7 @@ namespace spil
             }
 
         }
-        public void GetBoatType()
+        public void GetBoatType() //finder ud af hvilken type båd der er kaldt
         {
             int boat = 2;
             int ship = 3;
@@ -335,7 +334,7 @@ namespace spil
             } while (running);
         }
     
-        public void ChangePlayer()
+        public void ChangePlayer() //Skifter spiller
         {
             if (placementOrGuessing == false)
             {
@@ -384,7 +383,7 @@ namespace spil
             GetShootingGameBoardView();
 
         }
-        public void HorizontalOrVertical()
+        public void HorizontalOrVertical() //finder ud af om man vil placere skibet horizontalt eller Vertical
         {
             running = true;
             Console.Write("Hvilken vej vil du placere skibet?\n");
@@ -395,13 +394,13 @@ namespace spil
                 choice = GetUserChoise();
                 switch (choice)
                 {
-                    case "1":horizontalorvertical = false;  running = false; break;
-                    case "2":horizontalorvertical = true;  running = false; break;
+                    case "1":shipPlacementHorizontal = false;  running = false; break;
+                    case "2":shipPlacementHorizontal = true;  running = false; break;
                     default: ShowMenuSelectionErroe(); break;
                 }
             } while (running);
         }
-        public void ChoseShip()
+        public void ChosePlacementOfShip() //vælger hvor skibet skal placeres. Er der ikke nogle fejl kalder den metoden til at sætte skibet ind i kordinatsystemet
         {
             Console.Write(currentplayer);
             Console.Write("Vælg X: ");
@@ -417,13 +416,13 @@ namespace spil
                 PlaceShip();
             }
         }
-        public void PlaceShip()
+        public void PlaceShip() //placere det valgte skib
         {
             int xOrY = 0;
             int xPlace = xCordinat;
             int yPlace = yCordinat;
             Console.Write(currentplayer);
-            if (horizontalorvertical == false)
+            if (shipPlacementHorizontal == false)
             {
                 xOrY = yCordinat;                
             } else
@@ -435,7 +434,7 @@ namespace spil
                 {
                     xOrY = xOrY + 1;
                     CheckForError();
-                    if (horizontalorvertical == false)
+                    if (shipPlacementHorizontal == false)
                     {
                         xPlace = xCordinat;
                         yPlace = xOrY;
@@ -469,7 +468,7 @@ namespace spil
             }
             player++;           
         }
-        private string GetUserChoise()
+        private string GetUserChoise() //henter brugerens valg 
         {
             Console.WriteLine();
             Console.Write("Indtast dit valg: ");
@@ -480,23 +479,19 @@ namespace spil
             Console.WriteLine("Ugyldigt valg.");
             Console.ReadLine();
         }
-        private void TryAgain()
+        private void TryAgain() // nulstiller fejlvariablerne så man kan prøve igen
         {
             placementError = false;
             error = false;
         }
-        private void ShowCordinatesError()
+        private void ShowCordinatesError() // viser hvis man har lavet fejl under valget af kordinater (ikke sikker på den her er nødvendig)
         {
             if (xCordinat > 9 || yCordinat > 9)
             {
                 Console.WriteLine("Ugyldigt valg.");
                 Console.ReadLine();
             }
-            if (xCordinatcheck > 9 || yCordinatcheck > 9)
-            {
-                Console.WriteLine("Ugyldigt valg.");
-                Console.ReadLine();
-            }
+          
         }
     }
 }
